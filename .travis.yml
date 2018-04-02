@@ -1,0 +1,70 @@
+# ----------------------------------
+# auto-generated file, do not modify
+# ----------------------------------
+
+sudo: false
+language: cpp
+
+common_sources: &all_sources
+  - ubuntu-toolchain-r-test
+  - llvm-toolchain-trusty
+  - llvm-toolchain-trusty-3.9
+  - llvm-toolchain-trusty-4.0
+  - llvm-toolchain-trusty-5.0
+
+matrix:
+  include:
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources: *all_sources
+          packages:
+            - clang-3.8
+            - libstdc++-6-dev
+      env: COMPILER='clang++-3.8'
+
+
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources: *all_sources
+          packages:
+            - clang-4.0
+            - libstdc++-6-dev
+      env: COMPILER='clang++-4.0'
+
+
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources: *all_sources
+          packages:
+            - clang-5.0
+            - libstdc++-6-dev
+      env: COMPILER='clang++-5.0'
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y
+
+  - mkdir $HOME/usr
+  - export PATH="$HOME/usr/bin:$PATH"
+  - wget https://cmake.org/files/v3.11/cmake-3.11.0-rc4-Linux-x86_64.sh
+  - chmod +x cmake-3.11.0-rc4-Linux-x86_64.sh
+  - ./cmake-3.11.0-rc4-Linux-x86_64.sh --prefix=$HOME/usr --exclude-subdir --skip-license
+
+
+
+script:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=$COMPILER -DCMAKE_INSTALL_PREFIX=../install -DTLOC_DETAILED_LOGS=ON ../
+  - make install
+  - cd ..
+  - mkdir build_release
+  - cd build_release
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=$COMPILER -DCMAKE_INSTALL_PREFIX=../install -DTLOC_DETAILED_LOGS=ON ../
+  - make install
