@@ -5,7 +5,13 @@ TLOC_INCLUDE("/tl_base_ci/tl_base_ci.cmake" ${tl_base_ci_INCLUDE_DIRECTORIES})
 # -----------------------------------------------------------------------------
 # superbuild
 
-tl_add_superbuild(DESTINATION "${CMAKE_SOURCE_DIR}/")
+set(PROJ_NAME "tl_window")
+tl_add_superbuild(
+  PROJ_NAME
+    ${PROJ_NAME}
+  DESTINATION
+    "${CMAKE_SOURCE_DIR}/"
+  )
 
 # -----------------------------------------------------------------------------
 # travis

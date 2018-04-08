@@ -38,9 +38,7 @@ endfunction()
 
 # -----------------------------------------------------------------------------
 
-if(EXISTS "/home/samaursa/Repos/2LoC/tl_proj_template/CMakeLists_Pre.cmake")
-  include("/home/samaursa/Repos/2LoC/tl_proj_template/CMakeLists_Pre.cmake")
-endif()
+include("CMakeLists_Pre.cmake" OPTIONAL)
 
 # -----------------------------------------------------------------------------
 
@@ -63,7 +61,7 @@ if(NOT tl_base_ci_FOUND OR TLOC_ALWAYS_FETCHCONTENT)
   )
 
   FetchContent_GetProperties(tl_base_ci_ext)
-  if(NOT tl_base_ci_POPULATED)
+  if(NOT tl_base_ci_ext_POPULATED)
     FetchContent_Populate(tl_base_ci_ext)
     add_subdirectory(${tl_base_ci_ext_SOURCE_DIR} ${tl_base_ci_ext_BINARY_DIR})
     list(APPEND tl_base_ci_INCLUDE_DIRECTORIES "${tl_base_ci_ext_SOURCE_DIR}/include")
@@ -77,16 +75,8 @@ endif()
 
 # -----------------------------------------------------------------------------
 
-TLOC_INCLUDE_TEMP("/tl_base_ci/tl_common.cmake" ${tl_base_ci_INCLUDE_DIRECTORIES})
+TLOC_INCLUDE_TEMP("/tl_base_ci/tl_base_ci.cmake" ${tl_base_ci_INCLUDE_DIRECTORIES})
 TLOC_LOG_COMMON_VARIABLES()
-
-# -----------------------------------------------------------------------------
-
-# get the current directory name, which will be this project's external
-# build name
-string(REPLACE "/" ";" PATH_LIST "${CMAKE_SOURCE_DIR}")
-list(REVERSE PATH_LIST)
-list(GET PATH_LIST 0 PROJ_NAME)
 
 # -----------------------------------------------------------------------------
 
@@ -94,7 +84,7 @@ if(NOT TLOC_DISABLE_TESTS)
   enable_testing()
 endif()
 
-project(${PROJ_NAME})
+project(tl_window)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD ${TLOC_CMAKE_CXX_STANDARD})
@@ -102,9 +92,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ${TLOC_CMAKE_CXX_STANDARD_REQUIRED})
 
 # -----------------------------------------------------------------------------
 
-if(EXISTS "/home/samaursa/Repos/2LoC/tl_proj_template/CMakeLists_Post.cmake")
-  include("/home/samaursa/Repos/2LoC/tl_proj_template/CMakeLists_Post.cmake")
-endif()
+include("CMakeLists_Post.cmake" OPTIONAL)
 
 # -----------------------------------------------------------------------------
 
