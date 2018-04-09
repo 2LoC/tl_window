@@ -21,8 +21,10 @@ tl_add_executable(
     ${${EXE_NAME}_SOURCE_FILES}
   BUILD_INTERFACE
     ${CMAKE_SOURCE_DIR}/include/
+  FIND_PACKAGES
+    "SDL2;fmt"
   LINK_LIBS
-    "tl_window;tl_base;SDL2;fmt"
+    "tl_window;tl_base;SDL2::SDL2;fmt::fmt"
 
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
