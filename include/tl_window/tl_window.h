@@ -51,7 +51,7 @@ namespace tl { namespace gfx {
 };};
 
 #include <tl_base/tl_exception.h>
-namespace tl { namespace exc {
+namespace tl { namespace except {
 
   TLOC_EXCEPTION_DEFINE(window_initialization);
 
