@@ -24,7 +24,7 @@ tl_add_executable(
   FIND_PACKAGES
     "SDL2;fmt"
   LINK_LIBS
-    "tl_window;tl_base;SDL2::SDL2;fmt::fmt"
+    "tl_window;tl_base;SDL2;fmt;"
 
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
