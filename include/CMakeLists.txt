@@ -10,7 +10,7 @@ tl_add_superbuild(
   PROJ_NAME
     ${PROJ_NAME}
   DESTINATION
-    "${CMAKE_SOURCE_DIR}/"
+    "${PROJECT_SOURCE_DIR}/"
   )
 
 # -----------------------------------------------------------------------------
@@ -39,7 +39,10 @@ tl_add_travis(
 # gitignore
 
 tl_add_gitignore(
-  IGNORE_LIST "*setup*.sh"
+  IGNORE_LIST
+"*setup*.sh
+*install*/
+"
   )
 
 # -----------------------------------------------------------------------------
@@ -54,15 +57,15 @@ tl_add_setup(
   NAME "setup"
   BUILD_DIR "build"
   BUILD_TYPE "Debug"
-  DESTINATION ${SOURCE_DIR}
+  DESTINATION ${PROJECT_SOURCE_DIR}
   CL_ARGS ${CL_ARGS}
   )
 
 tl_add_setup(
   NAME "setup_release"
   BUILD_DIR "build_release"
-  BUILD_TYPE "Release"
-  DESTINATION ${SOURCE_DIR}
+  BUILD_TYPE "Debug"
+  DESTINATION ${PROJECT_SOURCE_DIR}
   CL_ARGS ${CL_ARGS}
   )
 
